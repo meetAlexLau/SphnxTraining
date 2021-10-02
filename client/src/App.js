@@ -27,17 +27,17 @@ function App() {
 
             <Nav className="justify-content-end">
             
-             {/* <Nav>
+             <Nav>
                 <Link to={"/view/:id"} className="nav-link">
-                  Create Student
+                  View Objects
                 </Link>
-             </Nav> */}
+             </Nav>
 
-              {/* <Nav>
-                <Link to={"/edit-student/:id"} className="nav-link">
-                  Edit Student
+              <Nav>
+                <Link to={"/edit/:id"} className="nav-link">
+                  Edit Objects
                 </Link>
-              </Nav> */}
+              </Nav>
 
               <Nav>
                 <Link to={"/create"} className="nav-link">
