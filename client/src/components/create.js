@@ -18,7 +18,7 @@ export default class Create extends Component {
         this.state = {
             renderText: "Sample Text",
             renderColor: "#00FF00",
-            renderFont: "Open Sans",
+            renderFont: "Arimo",
             renderFontSize: "24"
         }
     }
@@ -95,7 +95,7 @@ export default class Create extends Component {
   
           <Form.Group controlId="Font">
               <FontPicker
-                apiKey = 'AIzaSyDpvJ4vwYQ5IrLsANU2rngs1ahHODCH4Hw'
+                apiKey = 'AIzaSyA90e_JV6RbbRPLEmdA2nvLFoQ34d5e1NI'
                 activeFontFamily = {this.state.renderFont}
                 onChange = {this.onChangeFont} //add className = 'apply-font' to elements you want font to apply to
               />

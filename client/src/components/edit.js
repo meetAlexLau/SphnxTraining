@@ -9,10 +9,10 @@ export default class Editobject extends Component {
   constructor(props) {
     super(props)
 
-    this.onChangeObjectText = this.onChangeObjectText.bind(this);
-    this.onChangeObjectColor = this.onChangeObjectColor.bind(this);
-    this.onChangeObjectFont = this.onChangeObjectFont.bind(this);
-    this.onChangeObjectFontSize = this.onChangeObjectFontSize.bind(this);
+    this.onChangeText = this.onChangeText.bind(this)
+    this.onChangeColor = this.onChangeColor.bind(this)
+    this.onChangeFont = this.onChangeFont.bind(this)
+    this.onChangeFontSize = this.onChangeFontSize.bind(this)
     this.onSubmit = this.onSubmit.bind(this);
 
     // State
@@ -22,36 +22,57 @@ export default class Editobject extends Component {
       renderFont: '',
       renderFontSize: ''
     }
+    console.log(this.props.match.params.id)
   }
 
   componentDidMount() {
     axios.get('http://localhost:4000/objects/edit/' + this.props.match.params.id)
       .then(res => {
         this.setState({
-            text: res.data.text,
-            color: res.data.color,
-            font: res.data.font,
-            fontSize: res.data.fontSize
+            renderText: res.data.text,
+            renderColor: res.data.color,
+            renderFont: res.data.font,
+            renderFontSize: res.data.fontSize
         });
       })
       .catch((error) => {
         console.log(error);
       })
+      
   }
 
-  onChangeObjectText(e) {
-    this.setState({ renderText: e.target.value })
+  onChangeText(e){
+    this.setState({renderText: e.target.value}, () => { 
+      /*callback function. this.setState is async, 
+      we wait for state change then get state values
+      */
+      this.renderTextAttributes();
+    });
   }
 
-  onChangeObjectColor(e) {
-    this.setState({ renderColor: e.target.value })
+  onChangeColor(e){
+      this.setState({renderColor: e.target.value}, ()=> {
+        this.renderTextAttributes();
+      })
   }
 
-  onChangeObjectFont(e) {
-    this.setState({ renderFont: e.family })
+  onChangeFont(e){
+      this.setState({renderFont: e.family}, () => {
+        this.renderTextAttributes();
+      })
   }
-  onChangeObjectFontSize(e){
-      this.setState({renderFontSize: e.target.value})
+
+  onChangeFontSize(e){
+      this.setState({renderFontSize: e.target.value}, () => {
+        this.renderTextAttributes();
+      })
+  }
+  renderTextAttributes(){
+    let text = document.getElementById("displayText");
+    text.innerHTML = this.state.renderText;
+    text.style.color = this.state.renderColor +"";
+    text.style.fontFamily = this.state.renderFont +"";
+    text.style.fontSize = this.state.renderFontSize +"px";
   }
   onSubmit(e) {
     e.preventDefault()
@@ -72,31 +93,28 @@ export default class Editobject extends Component {
       })
 
     // Redirect to object List 
-    this.props.history.push('/')
+    this.props.history.push('/home')
   }
 
 
   render() {
+    console.log(this.state)
     return (<div className="form-wrapper">
       <Form onSubmit = {this.onSubmit}>
           <Form.Group controlId="Text">
             <Form.Label>Text</Form.Label>
-            <Form.Control type="text" value = {this.state.renderText}
+            <Form.Control type="text" defaultValue = {this.state.renderText}
              onChange = {this.onChangeText}/>
           </Form.Group>
   
           <Form.Group controlId="Color">
             <Form.Label>Color</Form.Label>
-            <Form.Control type="color" defaultValue = {this.state.renderColor} onChange = {this.onChangeColor}/>
+            <Form.Control type="color" value = {this.state.renderColor} onChange = {this.onChangeColor}/>
           </Form.Group>
   
           <Form.Group controlId="Font">
-              <FontPicker
-                apiKey = 'AIzaSyDpvJ4vwYQ5IrLsANU2rngs1ahHODCH4Hw'
-                activeFontFamily = {this.state.renderFont}
-                onChange = {this.onChangeFont} //add className = 'apply-font' to elements you want font to apply to
-              />
-            <Form.Label className = 'apply-font'>Font</Form.Label>
+              
+            <Form.Label className = 'apply-font'>Font: There is a cors error when using Google Font Api.</Form.Label>
           </Form.Group>
 
           <Form.Group controlId="Font Size">
@@ -105,7 +123,7 @@ export default class Editobject extends Component {
           </Form.Group>
   
           <Button variant="danger" size="lg" block="block" type="submit">
-            Create Object
+            Update Object
           </Button>
         </Form>
         <p className="text-center" id = "displayText" style = {{color:this.state.renderColor, fontSize: this.state.renderFontSize+"px", fontFamily: this.state.renderFont}}>

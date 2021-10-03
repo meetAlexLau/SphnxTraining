@@ -1,7 +1,6 @@
 let express = require('express');
 let mongoose = require('mongoose');
 let cors = require('cors');
-let bodyParser = require('body-parser');
 let dbConfig = require('./database/db');
 
 // Express Route
@@ -19,13 +18,18 @@ mongoose.connect(dbConfig.db, {
   }
 )
 
+const allowedOrigins = ['http://localhost:3000'];
+
+let options = cors.CorsOptions = {
+  origin: allowedOrigins
+};
+
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+app.use(cors(options));
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 app.use('/objects', objectRoute)
 
 

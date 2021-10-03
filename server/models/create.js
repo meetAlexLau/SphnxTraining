@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let objectSchema = new Schema({
-    name: {
+    text: {
         type: String
     },
     color: {
