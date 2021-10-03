@@ -65,6 +65,7 @@ export default class Create extends Component {
         e.preventDefault() //prevents default behavior
     
         console.log(`Object successfully created!`);
+        console.log(this.state.renderText);
         const objectObject = {
           text: this.state.renderText,
           color: this.state.renderColor,
