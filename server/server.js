@@ -8,7 +8,7 @@ const objectRoute = require('./routes/routes')
 
 // Connecting mongoDB Database
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.db, {
+mongoose.connect("mongodb+srv://Alex:Password1-@cluster0.x2pii.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
   useNewUrlParser: true
 }).then(() => {
   console.log('Database sucessfully connected!')
