@@ -5,10 +5,11 @@
   "main": "server.js",
   "type": "commonjs",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && run build"
   },
   "keywords": [],
-  "author": "Alex Lau",
+  "author": "Alex Lau", 
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
