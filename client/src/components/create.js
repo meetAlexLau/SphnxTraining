@@ -73,10 +73,11 @@ export default class Create extends Component {
           fontSize: this.state.renderFontSize
         };
 
-        axios.post('http://localhost:4000/objects/create', objectObject)
+        axios.post('http://localhost:5000/objects/create', objectObject)
         .then(res => console.log(res.data));
 
         this.setState({renderText: '', renderColor: '', renderFont: this.state.renderFont, renderFontSize: ''})
+        this.props.history.push('/')
     }
 
     render() {

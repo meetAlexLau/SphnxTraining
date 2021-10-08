@@ -26,7 +26,7 @@ export default class Editobject extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:4000/objects/edit/' + this.props.match.params.id)
+    axios.get('http://localhost:5000/objects/' + this.props.match.params.id)
       .then(res => {
         this.setState({
             renderText: res.data.text,
@@ -83,8 +83,8 @@ export default class Editobject extends Component {
         font: this.state.renderFont,
         fontSize: this.state.renderFontSize
     };
-
-    axios.put('http://localhost:4000/objects/update/' + this.props.match.params.id, objectObject)
+    console.log(objectObject);
+    axios.post('http://localhost:5000/objects/update/' + this.props.match.params.id, objectObject)
       .then((res) => {
         console.log(res.data)
         console.log('Object successfully updated')
@@ -93,7 +93,8 @@ export default class Editobject extends Component {
       })
 
     // Redirect to object List 
-    this.props.history.push('/home')
+    this.props.history.push('/')
+    window.location.reload(false)
   }
 
 

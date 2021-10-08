@@ -2,7 +2,7 @@ let express = require('express');
 let mongoose = require('mongoose');
 let cors = require('cors');
 let dbConfig = require('./database/db');
-
+const path = require("path")
 // Express Route
 const objectRoute = require('./routes/routes')
 
@@ -18,23 +18,17 @@ mongoose.connect("mongodb+srv://Alex:Password1-@cluster0.x2pii.mongodb.net/myFir
   }
 )
 
-const allowedOrigins = ['http://localhost:3000'];
-
-let options = cors.CorsOptions = {
-  origin: allowedOrigins
-};
 
 const app = express();
 
 app.use(cors());
-app.use(cors(options));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use('/objects', objectRoute)
 
 
 // PORT
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
   console.log('Connected to port ' + port)
 })
@@ -49,5 +43,3 @@ app.use(function (err, req, res, next) {
   if (!err.statusCode) err.statusCode = 500;
   res.status(err.statusCode).send(err.message);
 });
-
-module.exports= app;

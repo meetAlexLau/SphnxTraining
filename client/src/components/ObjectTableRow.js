@@ -9,7 +9,7 @@ export default class ObjectTableRow extends Component {
     }
     deleteObject(){
         console.log(this.props.obj._id)
-        axios.delete('http://localhost:4000/objects/delete/' + this.props.obj._id)
+        axios.delete('http://localhost:5000/objects/delete/' + this.props.obj._id)
         .then((red) => {
             console.log('Object successfully deleted!')
             window.location.reload();
@@ -25,6 +25,11 @@ export default class ObjectTableRow extends Component {
                 <td>{this.props.obj.font}</td>
                 <td>{this.props.obj.fontSize}</td>
                 <td>
+                    <Link style={{color: "white"}} className = "btn btn-success"
+                    to = {"/view/" + this.props.obj._id}
+                    >
+                        View
+                     </Link>
                     <Link style={{color: "white"}} className = "btn btn-info"
                     to = {"/edit/" + this.props.obj._id}
                     >

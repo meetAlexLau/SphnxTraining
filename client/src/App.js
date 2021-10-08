@@ -20,25 +20,12 @@ function App() {
           <Container>
 
             <Navbar.Brand>
-              <Link to={"/home"} className="nav-link">
+              <Link to={"/"} className="nav-link">
                 React MERN Stack App
               </Link>
             </Navbar.Brand>
 
             <Nav className="justify-content-end">
-            
-             <Nav>
-                <Link to={"/view/:id"} className="nav-link">
-                  View Objects
-                </Link>
-             </Nav>
-
-              <Nav>
-                <Link to={"/edit/:id"} className="nav-link">
-                  Edit Objects
-                </Link>
-              </Nav>
-
               <Nav>
                 <Link to={"/create"} className="nav-link">
                   Create New Object
@@ -55,7 +42,7 @@ function App() {
           <Col md={12}>
             <div className="wrapper">
               <Switch>
-                <Route exact path='/home' component={Home} />
+                <Route exact path='/' component={Home} />
                 <Route path="/create" component={Create} />
                 <Route path="/edit/:id" component={Edit} />
                 <Route path="/view/:id" component={View} />
